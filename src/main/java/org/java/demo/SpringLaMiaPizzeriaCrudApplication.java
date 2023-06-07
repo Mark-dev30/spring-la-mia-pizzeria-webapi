@@ -56,8 +56,29 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		userService.save(userUser);
 		userService.save(userAdmin);
 		
+		Ingredient in1 = new Ingredient("Flour");
+		Ingredient in2 = new Ingredient("Tomato");
+		Ingredient in3 = new Ingredient("Cheese");
+		Ingredient in4 = new Ingredient("Oil");
+		Ingredient in5 = new Ingredient("Ham");
+		Ingredient in6 = new Ingredient("Mushrooms");
+		Ingredient in7 = new Ingredient("Olives");
+		Ingredient in8 = new Ingredient("Peas");
+		Ingredient in9 = new Ingredient("Rocket");
+		Ingredient in10 = new Ingredient("Raw ham");
 		
-		Pizza p1 = new Pizza("Margherita", "Classic pizza in italy", "https://www.centrocormano.it/wp-content/uploads/2021/08/tipi-di-pizze-2.jpg", 5);
+		ingredientService.save(in1);
+		ingredientService.save(in2);
+		ingredientService.save(in3);
+		ingredientService.save(in4);
+		ingredientService.save(in5);
+		ingredientService.save(in6);
+		ingredientService.save(in7);
+		ingredientService.save(in8);
+		ingredientService.save(in9);
+		ingredientService.save(in10);
+		
+		Pizza p1 = new Pizza("Margherita", "Classic pizza in italy", "https://www.centrocormano.it/wp-content/uploads/2021/08/tipi-di-pizze-2.jpg", 5, in1,in2);
 		Pizza p2 = new Pizza("Capriciosa", "Classic pizza in italy", "https://upload.wikimedia.org/wikipedia/commons/2/2a/Pizza_capricciosa.jpg", 10);
 		Pizza p3 = new Pizza("Pomodoro", "Classic pizza in italy", "https://www.centrocormano.it/wp-content/uploads/2021/08/tipi-di-pizze-2.jpg", 15);
 		Pizza p4 = new Pizza("Prosciutto e Funghi", "Classic pizza in italy", "https://upload.wikimedia.org/wikipedia/commons/2/2a/Pizza_capricciosa.jpg", 12);
@@ -83,27 +104,27 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		specialofferService.save(sp7);
 		specialofferService.save(sp8);
 		
-		Ingredient in1 = new Ingredient("Flour");
-		Ingredient in2 = new Ingredient("Tomato");
-		Ingredient in3 = new Ingredient("Cheese");
-		Ingredient in4 = new Ingredient("Oil");
-		Ingredient in5 = new Ingredient("Ham");
-		Ingredient in6 = new Ingredient("Mushrooms");
-		Ingredient in7 = new Ingredient("Olives");
-		Ingredient in8 = new Ingredient("Peas");
-		Ingredient in9 = new Ingredient("Rocket");
-		Ingredient in10 = new Ingredient("Raw ham");
-		
-		ingredientService.save(in1);
-		ingredientService.save(in2);
-		ingredientService.save(in3);
-		ingredientService.save(in4);
-		ingredientService.save(in5);
-		ingredientService.save(in6);
-		ingredientService.save(in7);
-		ingredientService.save(in8);
-		ingredientService.save(in9);
-		ingredientService.save(in10);
+//		Ingredient in1 = new Ingredient("Flour");
+//		Ingredient in2 = new Ingredient("Tomato");
+//		Ingredient in3 = new Ingredient("Cheese");
+//		Ingredient in4 = new Ingredient("Oil");
+//		Ingredient in5 = new Ingredient("Ham");
+//		Ingredient in6 = new Ingredient("Mushrooms");
+//		Ingredient in7 = new Ingredient("Olives");
+//		Ingredient in8 = new Ingredient("Peas");
+//		Ingredient in9 = new Ingredient("Rocket");
+//		Ingredient in10 = new Ingredient("Raw ham");
+//		
+//		ingredientService.save(in1);
+//		ingredientService.save(in2);
+//		ingredientService.save(in3);
+//		ingredientService.save(in4);
+//		ingredientService.save(in5);
+//		ingredientService.save(in6);
+//		ingredientService.save(in7);
+//		ingredientService.save(in8);
+//		ingredientService.save(in9);
+//		ingredientService.save(in10);
 		
 	}
 }

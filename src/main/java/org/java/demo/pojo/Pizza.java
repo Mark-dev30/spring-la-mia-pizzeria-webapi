@@ -4,6 +4,11 @@ package org.java.demo.pojo;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +20,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity 
+@JsonIdentityInfo(
+	generator = ObjectIdGenerators.PropertyGenerator.class,
+	property = "id"
+)
 public class Pizza {
 	
 	@Id
@@ -43,7 +52,7 @@ public class Pizza {
 		setDescription(description);
 		setPhoto(photo);
 		setPrice(price);
-		setIngredients(ingredients);
+		setNewIngredients(ingredients);
 	}
 	
 	public int getId() {
@@ -88,10 +97,12 @@ public class Pizza {
 	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
+	
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
-	public void setIngredients(Ingredient[] ingredients) {
+	
+	public void setNewIngredients(Ingredient[] ingredients) {
 		setIngredients(Arrays.asList(ingredients));
 	}
 	public void addIngredient(Ingredient ingredient) {

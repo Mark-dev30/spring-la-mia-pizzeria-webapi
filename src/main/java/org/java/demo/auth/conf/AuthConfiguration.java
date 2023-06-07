@@ -25,7 +25,8 @@ public class AuthConfiguration {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    
 		return 
-				http.authorizeHttpRequests(a -> a
+				http.csrf(c -> c.disable())
+						.authorizeHttpRequests(a -> a
 						.requestMatchers("/offer/create/**").hasAuthority("ADMIN")
 						.requestMatchers("/offer/update/**").hasAuthority("ADMIN")
 						.requestMatchers("/offer/delete/**").hasAuthority("ADMIN")
@@ -35,7 +36,9 @@ public class AuthConfiguration {
 						.requestMatchers("/pizza/delete/**").hasAuthority("ADMIN")
 						.requestMatchers("/pizza/update/**").hasAuthority("ADMIN")
 						.requestMatchers("/pizza/create/**").hasAuthority("ADMIN")
+						.requestMatchers("/api/v1/**").permitAll()
 				        .requestMatchers("/**").hasAnyAuthority("USER", "ADMIN")
+				        
 				).formLogin(f -> f.permitAll()
 				).logout(l -> l.logoutSuccessUrl("/")
 				).build();
