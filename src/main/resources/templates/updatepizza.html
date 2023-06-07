@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12" th:object="${pizza}">
+				<h2>Update</h2>
+				<form th:action="@{/pizza/update/{id} (id=*{id})}" method="POST">
+					  <div class="mb-3">
+							<label  class="form-label">Name</label>
+						    <input type="text" class="form-control"  name="name" th:value="*{name}">
+						    <label class="text-danger" th:if="${errors != null && errors.hasFieldErrors('name')}">[[ ${errors.getFieldError('name').defaultMessage}]]</label>
+					  </div>
+					  <div class="mb-3">
+							<label  class="form-label">Description</label>
+						    <input type="text" class="form-control"  name="description" th:value="*{description}">
+						    <label class="text-danger" th:if="${errors != null && errors.hasFieldErrors('description')}">[[ ${errors.getFieldError('description').defaultMessage}]]</label>
+					  </div>
+					  <div class="mb-3">
+							<label  class="form-label">Photo</label>
+						    <input type="text" class="form-control"  name="photo" th:value="*{photo}">
+					  </div>
+					  <div class="mb-3">
+							<label  class="form-label">Price</label>
+						    <input type="number" class="form-control"  name="price" th:value="*{price}">
+						    <label class="text-danger" th:if="${errors != null && errors.hasFieldErrors('price')}">[[ ${errors.getFieldError('price').defaultMessage}]]</label>
+					  </div>
+					  <div class="form-check" th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+						  <input th:id="${'ingredient-' + ingredient.id}" th:value="*{id}"  th:checked="${pizza.ingredients.contains(ingredient)}"class="form-check-input" type="checkbox" name="ingredients" >
+						  <label th:for="${'ingredient-' + ingredient.id}" class="form-check-label">
+						  [[ *{name} ]]
+						  </label>
+					  </div>
+		  
+	  	  				<button class="btn btn-primary" type="submit" value="update">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

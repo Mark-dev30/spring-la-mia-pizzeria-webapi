@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12" th:object="${ingredient}">
+				<h2>Create</h2>
+				<form method="POST">
+					  <div class="mb-3">
+							<label  class="form-label">Name</label>
+						    <input type="text" class="form-control"  name="name" >
+					  </div>
+	  	  			  <button class="btn btn-primary" type="submit" value="CREATE">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
