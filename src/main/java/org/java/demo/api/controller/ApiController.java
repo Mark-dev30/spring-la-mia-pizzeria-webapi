@@ -26,22 +26,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
 	@Autowired
 	private PizzaService pizzaService;
-//	Lista pizze/Ricerca
-	
+//	Lista pizze
 	@GetMapping("/pizze")
-	public ResponseEntity<List<Pizza>> getPizze(@RequestParam String name){
+	public ResponseEntity<List<Pizza>> getPizze(@RequestParam(required = false) String name){
 		
 		if(name == null) {
 			List<Pizza> pizze = pizzaService.findAll();
 			return new ResponseEntity<>(pizze, HttpStatus.OK);
 		}
-		List<Pizza> pizze = pizzaService.findByNameContaining(name);
+		else {
+			List<Pizza> pizze = pizzaService.findByNameContaining(name);
+			
+			return new ResponseEntity<>(pizze, HttpStatus.OK);
+		}
 		
-		return new ResponseEntity<>(pizze, HttpStatus.OK);
+		
 	}
 	
 //	Pizza Singola
-	
 	@GetMapping("/pizza/{id}")
 	public ResponseEntity<Pizza> getPizza(@PathVariable int id){
 		
@@ -50,7 +52,6 @@ public class ApiController {
 		return new ResponseEntity<>(pizza, HttpStatus.OK);
 	}
 	
-//	Creazione nuova pizza
 	@PostMapping("/pizze")
 	public ResponseEntity<PizzaDto> pizzaStore(
 			@RequestBody Pizza pizza
@@ -61,7 +62,6 @@ public class ApiController {
 		return new ResponseEntity<>(new PizzaDto(pizza), HttpStatus.OK);
 	}
 	
-//	Modifica di una pizza
 	@PutMapping("/pizza")
 	public ResponseEntity<PizzaDto> pizzaUpdate(
 			@RequestBody Pizza pizza
@@ -71,8 +71,6 @@ public class ApiController {
 		
 		return new ResponseEntity<>(new PizzaDto(pizza), HttpStatus.OK);
 	}
-	
-//	Rimuovere una pizza
 	
 	@DeleteMapping("/pizza/{id}")
 	public ResponseEntity<PizzaDto> deletePizza(@PathVariable int id){
