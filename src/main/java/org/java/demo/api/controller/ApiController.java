@@ -8,6 +8,7 @@ import org.java.demo.pojo.Pizza;
 import org.java.demo.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +48,12 @@ public class ApiController {
 	@GetMapping("/pizza/{id}")
 	public ResponseEntity<Pizza> getPizza(@PathVariable int id){
 		
-		Pizza pizza = pizzaService.findById(id).get();
+		Optional<Pizza> pizzaid = pizzaService.findById(id);
+		
+		if(pizzaid.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		Pizza pizza = pizzaid.get();
 		
 		return new ResponseEntity<>(pizza, HttpStatus.OK);
 	}
@@ -75,7 +81,15 @@ public class ApiController {
 	@DeleteMapping("/pizza/{id}")
 	public ResponseEntity<PizzaDto> deletePizza(@PathVariable int id){
 		
-		Pizza pizza = pizzaService.findById(id).get();
+		Optional<Pizza> pizzaid = pizzaService.findById(id);
+		
+		if(pizzaid.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		Pizza pizza = pizzaid.get();
+		pizza.getIngredients().clear();
+		pizzaService.save(pizza);
 		pizzaService.deletePizza(pizza);
 		
 		return new ResponseEntity<>(new PizzaDto(pizza), HttpStatus.OK);
